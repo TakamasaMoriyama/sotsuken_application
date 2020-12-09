@@ -1,0 +1,51 @@
+<%= form_tag home_path, method: :get do %>
+  <%= select_tag(:select_name, options_for_select(@select_name2, selected: params[:select_name])) %>
+  <%= select_tag(:select_event_context, options_for_select(@select_event_context2, selected: params[:select_event_context])) %>
+  <%= select_tag(:select_event, options_for_select(@select_event2, selected: params[:select_event])) %>
+  <%= submit_tag '検索'%>
+<% end %>
+
+<div>
+	<% if @log.try(:id) %>
+		<div class="text-center"><span class="h3"><%= @log.name %></span>　　<a href="/homes/<%= @log.id %>" data-method="delete"><i class="fas fa-trash"></i></a></div>
+	<% else %>
+		<div class="text-center"><span class="h3"><%= @log2.name %></span>　　<a href="/homes/<%= @log2.id %>" data-method="delete"><i class="fas fa-trash"></i></a></div>
+	<% end %>
+	<table class="table table-sm">
+		<% if @log.try(:id) %>
+			<tbody>
+				<tr>
+					<th scope="col">時間</th>
+					<th scope="col">名前</th>
+					<th scope="col">イベントコンテキスト</th>
+					<th scope="col">イベント</th>
+				</tr>
+				<% @log.elements.each do |element|%>
+					<tr>
+						<td><%= element.time %></td>
+						<td><%= element.name %></td>
+						<td><%= element.event_context %></td>
+						<td><%= element.event %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		<% else %>
+			<tbody>
+				<tr>
+					<th scope="col">時間</th>
+					<th scope="col">名前</th>
+					<th scope="col">イベントコンテキスト</th>
+					<th scope="col">イベント</th>
+				</tr>
+				<% @log.each do |element|%>
+					<tr>
+						<td><%= element.time %></td>
+						<td><%= element.name %></td>
+						<td><%= element.event_context %></td>
+						<td><%= element.event %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		<% end %>
+	</table>
+</div>

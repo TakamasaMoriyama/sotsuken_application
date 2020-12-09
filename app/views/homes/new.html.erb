@@ -1,0 +1,14 @@
+<p>moodleのlogのcsv出力ファイルを解析する</p>
+<%= form_tag({controller: "homes", action: "create", method: "post"}, {multipart: true}) do %>
+  <div class="field">
+    <%= label_tag "log-name", "ログの名前を入力してください" %><br>
+    <%= text_field :logs, :name,id:"log-name",class:"form-control",placeholder:"(例) 小テスト１"%>
+
+    <%= label_tag "CSVファイルを選択" %><br>
+    <%= file_field_tag :csv_file %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "読み込む"%>
+  </div>
+<% end %>

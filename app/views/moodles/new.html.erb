@@ -1,0 +1,14 @@
+<p>moodleのuserとpasswordを保存する</p>
+<%= form_tag({controller: "moodles", action: "create", method: "post"}, {multipart: true}) do %>
+  <div class="field">
+    <%= label_tag "username", "ユーザーネームを入力してください" %><br>
+    <%= text_field :moodle, :username, id:"username", class:"form-control"%>
+
+    <%= label_tag "password", "パスワードを入力してください" %><br>
+    <%= text_field :moodle, :password ,id:"password", class:"form-control"%>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "保存する"%>
+  </div>
+<% end %>

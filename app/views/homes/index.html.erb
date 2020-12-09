@@ -1,0 +1,26 @@
+<% @logs.each do |log|%>
+<div class="margin">
+	<div class="text-center"><span class="h3"><%= log.name %></span>　　<a href="/homes/<%= log.id %>" data-method="delete"><i class="fas fa-trash"></i></a></div>
+	<table class="table table-sm">
+		<tbody>
+			<tr>
+				<th scope="col">時間</th>
+				<th scope="col">名前</th>
+				<th scope="col">イベントコンテキスト</th>
+				<th scope="col">イベント</th>
+			</tr>
+			<% log.elements.limit(10).each do |element|%>
+			<tr>
+				<td><%= element.time %></td>
+				<td><%= element.name %></td>
+				<td><%= element.event_context %></td>
+				<td><%= element.event %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<p class="h3 text-center"><a href="/homes/<%= log.id %>" class="h3">詳細</a></p>
+</div>
+<% end %>
+
+<%= paginate @logs %>

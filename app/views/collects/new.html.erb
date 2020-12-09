@@ -1,0 +1,20 @@
+<p>moodleのlogのcsv出力ファイルを解析する</p>
+<%= form_tag({controller: "collects", action: "create", method: "post"}, {multipart: true}) do %>
+  <div class="field">
+    <%= label_tag "moodle-url", "moodleのURLを入力してください" %><br>
+    <%= text_field :logs, :moodle_url, id:"moodle-url",class:"form-control",placeholder:"(例) https://e-mdl.kure-nct.ac.jp/report/log/index.php?id=402"%>
+
+    <%= label_tag "moodle-username", "moodleのユーザーネームを入力してください" %><br>
+    <%= text_field :logs, :moodle_username, id:"moodle-username",class:"form-control",value: Moodle.all[0].username %>
+
+    <%= label_tag "moodle-password", "moodleのパスワードを入力してください" %><br>
+    <%= text_field :logs, :moodle_password, id:"moodle-password",class:"form-control",value: Moodle.all[0].password %>
+
+    <%= label_tag "log-name", "ログの名前を入力してください" %><br>
+    <%= text_field :logs, :log_name, id:"log-name",class:"form-control",placeholder:"(例) 小テスト１"%>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "取得する"%>
+  </div>
+<% end %>
