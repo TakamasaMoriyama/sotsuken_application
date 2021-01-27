@@ -7,6 +7,7 @@ class HomesController < ApplicationController
   end
 
   def show
+#以下通常検索
     @log2 = Log.find(params[:id])
     @select_name = []
     @select_name2 = []
@@ -15,6 +16,7 @@ class HomesController < ApplicationController
     @select_event = []
     @select_event2 = []
     if params[:select_name].present? || params[:select_event_context].present? || params[:select_event].present?
+      binding.pry
       if params[:select_name].present? && params[:select_event_context].present? && params[:select_event].present?
         @log = Log.find(params[:id]).elements.where(name: params[:select_name], event_context: params[:select_event_context], event: params[:select_event])
       elsif params[:select_name].present? && params[:select_event_context].present?
@@ -29,10 +31,33 @@ class HomesController < ApplicationController
         @log = Log.find(params[:id]).elements.where(event_context: params[:select_event_context])
       elsif params[:select_event].present?
         @log = Log.find(params[:id]).elements.where(event: params[:select_event])
+      else
+        @log = @log2 if @log.nil?
+      end
+    end
+
+#以下not検索
+    if params[:not_select_name].present? || params[:not_select_event_context].present? || params[:not_select_event].present?
+      if params[:not_select_name].present? && params[:not_select_event_context].present? && params[:not_select_event].present?
+        @log = Log.find(params[:id]).elements.where.not(name: params[:not_select_name], event_context: params[:not_select_event_context], event: params[:not_select_event])
+      elsif params[:not_select_name].present? && params[:not_select_event_context].present?
+        @log = Log.find(params[:id]).elements.where.not(name: params[:not_select_name], event_context: params[:not_select_event_context])
+      elsif params[:not_select_name].present? && params[:not_select_event].present?
+        @log = Log.find(params[:id]).elements.where.not(name: params[:not_select_name], event: params[:not_select_event])
+      elsif params[:not_select_event].present? && params[:not_select_event_context].present?
+        @log = Log.find(params[:id]).elements.where.not(event: params[:not_select_event], event_context: params[:not_select_event_context])
+      elsif params[:not_select_name].present?
+        @log = Log.find(params[:id]).elements.where.not(name: params[:not_select_name])
+      elsif params[:not_select_event_context].present?
+        @log = Log.find(params[:id]).elements.where.not(event_context: params[:not_select_event_context])
+      elsif params[:not_select_event].present?
+        @log = Log.find(params[:id]).elements.where.not(event: params[:not_select_event])
       end
     else
-      @log = @log2
+      @log = @log2 if @log.nil?
     end
+
+
 
     @log2.elements.each do |element|
       unless @select_name.include? element.name

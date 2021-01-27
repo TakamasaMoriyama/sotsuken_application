@@ -19,6 +19,7 @@
       </button>
       <span> <%= link_to "ログをアップロードする", new_home_path %> </span>
       <span class="nav-item"> <%= link_to "ログを収集する", new_collect_path %> </span>
+      <span class="nav-item"> <%= link_to "ログを定期収集する", new_subscription_path %> </span>
       <% if Moodle.all[0] %>
         <span class="nav-item"> <%= link_to "ログイン情報を削除する", moodle_path(Moodle.all[0]), :method => :delete %> </span>
       <% else %>

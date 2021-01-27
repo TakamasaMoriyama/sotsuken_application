@@ -5,6 +5,13 @@
   <%= submit_tag '検索'%>
 <% end %>
 
+<%= form_tag home_path, method: :get do %>
+  <%= select_tag(:not_select_name, options_for_select(@select_name2, selected: params[:not_select_name])) %>
+  <%= select_tag(:not_select_event_context, options_for_select(@select_event_context2, selected: params[:not_select_event_context])) %>
+  <%= select_tag(:not_select_event, options_for_select(@select_event2, selected: params[:not_select_event])) %>
+  <%= submit_tag 'not検索'%>
+<% end %>
+
 <div>
 	<% if @log.try(:id) %>
 		<div class="text-center"><span class="h3"><%= @log.name %></span>　　<a href="/homes/<%= @log.id %>" data-method="delete"><i class="fas fa-trash"></i></a></div>

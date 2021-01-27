@@ -10,6 +10,8 @@ gem 'roo'
 gem 'pry-byebug'
 
 # Use sqlite3 as the database for Active Record
+gem 'crono'
+gem 'daemons'
 gem 'sqlite3', '~> 1.4'
 gem 'uglifier'
 gem 'jquery-rails'
