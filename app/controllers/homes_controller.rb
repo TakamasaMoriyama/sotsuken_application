@@ -16,7 +16,6 @@ class HomesController < ApplicationController
     @select_event = []
     @select_event2 = []
     if params[:select_name].present? || params[:select_event_context].present? || params[:select_event].present?
-      binding.pry
       if params[:select_name].present? && params[:select_event_context].present? && params[:select_event].present?
         @log = Log.find(params[:id]).elements.where(name: params[:select_name], event_context: params[:select_event_context], event: params[:select_event])
       elsif params[:select_name].present? && params[:select_event_context].present?
